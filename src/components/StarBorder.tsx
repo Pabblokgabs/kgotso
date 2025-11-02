@@ -8,6 +8,7 @@ type StarBorderProps<T extends React.ElementType> =
 		color?: string;
 		speed?: React.CSSProperties["animationDuration"];
 		thickness?: number;
+		bgColor?: string;
 	};
 
 const StarBorder = <T extends React.ElementType = "button">({
@@ -17,13 +18,14 @@ const StarBorder = <T extends React.ElementType = "button">({
 	speed = "6s",
 	thickness = 1,
 	children,
+	bgColor,
 	...rest
 }: StarBorderProps<T>) => {
 	const Component = as || "button";
 
 	return (
 		<Component
-			className={`relative inline-block overflow-hidden rounded-[20px] ${className}`}
+			className={`relative inline-block transition-all duration-300 ease-in-out overflow-hidden cursor-pointer rounded-[20px] ${className}`}
 			{...(rest as any)}
 			style={{
 				padding: `${thickness}px 0`,
@@ -33,7 +35,7 @@ const StarBorder = <T extends React.ElementType = "button">({
 			<div
 				className="absolute w-[300%] h-[50%] opacity-70 bottom-[-11px] right-[-250%] rounded-full animate-star-movement-bottom z-0"
 				style={{
-					background: `radial-gradient(circle, ${color}, transparent 10%)`,
+					background: `radial-gradient(circle, #0000ff, transparent 10%)`,
 					animationDuration: speed,
 				}}
 			></div>
@@ -44,7 +46,13 @@ const StarBorder = <T extends React.ElementType = "button">({
 					animationDuration: speed,
 				}}
 			></div>
-			<div className="relative z-1 bg-linear-to-b from-black to-gray-900 border border-gray-800 text-white text-center text-[16px] py-4 px-[26px] rounded-[20px]">
+			<div
+				className={`relative z-1 ${
+					bgColor
+						? bgColor
+						: "bg-linear-to-b hover:bg-linear-to-t text-white from-black to-gray-900"
+				} border border-gray-800  text-center text-[16px] py-4 px-[26px] rounded-[20px] hover:bg-linear-to-b hover:from-blue-800 hover:to-indigo-950`}
+			>
 				{children}
 			</div>
 		</Component>
