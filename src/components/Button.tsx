@@ -16,11 +16,11 @@ const Button = ({
 		<StarBorder
 			as="button"
 			className={className}
-			color="Magenta"
+			color="blue"
 			speed="3s"
 			onClick={onclick}
 			thickness={5}
-			bgColor={btnColor}
+			btnColor={btnColor}
 		>
 			{Children}
 		</StarBorder>

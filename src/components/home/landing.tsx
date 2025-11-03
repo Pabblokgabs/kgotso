@@ -5,11 +5,11 @@ import DarkVeil from "../DarkVeil";
 import Nav from "./navBar";
 import { startTyping, imageStyle } from "../../lib/helpers";
 import Button from "../Button";
-// import VariableProximity from "../VariableProximity";
+// import VariableProximity from "../Proximity";
 
 function Landing() {
 	const revealImgRef = useRef<HTMLImageElement | null>(null);
-	// const containerRef = useRef<HTMLDivElement | null>(null);
+	// const containerRef = useRef<any>(null);
 
 	useEffect(() => {
 		startTyping();
@@ -80,10 +80,7 @@ function Landing() {
 										</p>
 										<div className="flex flex-wrap gap-4">
 											<a href="#projects">
-												<Button
-													Children={"View Projects"}
-													className=""
-												/>
+												<Button Children={"View Projects"} className="" />
 											</a>
 											<a href="#contact">
 												<Button

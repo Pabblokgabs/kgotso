@@ -2,11 +2,14 @@ import Landing from "./components/home/landing";
 import ClickSpark from "./components/ClickSpark";
 import { useEffect } from "react";
 import { Animation } from "./lib/helpers";
+import Project from "./components/home/project";
+import Footer from "./components/home/footer";
+import About from "./components/home/about";
 
 function App() {
 	useEffect(() => Animation(), []);
 	return (
-		<div className="flex flex-col items-center justify-center min-h-screen max-w-screen overflow-x-hidden">
+		<div className="flex flex-col items-center justify-center min-h-screen max-w-screen overflow-hidden">
 			<ClickSpark
 				sparkColor="#fff"
 				sparkSize={10}
@@ -15,7 +18,9 @@ function App() {
 				duration={400}
 			>
 				<Landing />
-				<div className="h-screen bg-amber-400" />
+				<Project />
+				{/* <About /> */}
+				<Footer />
 			</ClickSpark>
 		</div>
 	);
