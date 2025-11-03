@@ -19,7 +19,7 @@ function App() {
 			>
 				<Landing />
 				<Project />
-				{/* <About /> */}
+				<About />
 				<Footer />
 			</ClickSpark>
 		</div>

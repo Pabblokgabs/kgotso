@@ -3,13 +3,14 @@ import { useRef } from "react";
 import AboutCard from "./aboutMeCard";
 
 // Image Example Interactive Reveal Effect
+
 function About() {
 	const revealImgRef = useRef<HTMLImageElement | null>(null);
 
 	return (
 		<section
 			id="about"
-			className="h-[120vh] relative overflow-hidden bg-[#060010]"
+			className="relative overflow-hidden bg-[#060010]"
 			onMouseMove={(e) => {
 				const rect = e.currentTarget.getBoundingClientRect();
 				const x = e.clientX - rect.left;
@@ -28,35 +29,18 @@ function About() {
 				}
 			}}
 		>
-			<div className="absolute inset-0">
-				<div className="absolute inset-0 w-full h-full">
-					<div className="absolute inset-0">
-						<LaserFlow
-							horizontalBeamOffset={0.1}
-							verticalBeamOffset={0.0}
-							color="#FF79C6"
-						/>
-					</div>
-					<div className="absolute inset-0 pointer-events-auto">
-						<div className="h-full container mx-auto">
-							<AboutCard />
-						</div>
-					</div>
-				</div>
+			{/* Background laser flow (absolute) */}
+			<div className="pointer-events-none hidden lg:block absolute inset-0 z-0">
+				<LaserFlow
+					horizontalBeamOffset={-0.1}
+					verticalBeamOffset={-0.5}
+					color="#FF79C6"
+				/>
 			</div>
 
-			<div id="bottom" className="flex-1 relative h-[30vh]">
-				<div
-					style={{
-						position: "absolute",
-						top: "50%",
-						left: "50%",
-						transform: "translateX(-50%)",
-						width: "86%",
-						height: "60%",
-					}}
-					className="absolute bg-[#060010] rounded-[20px] border-2 border-[#FF79C6] flex items-center justify-center z-6"
-				></div>
+			{/* Content in normal flow so section height follows children */}
+			<div className="relative z-10 container mx-auto py-12">
+				<AboutCard />
 			</div>
 		</section>
 	);
