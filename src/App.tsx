@@ -5,6 +5,7 @@ import { Animation } from "./lib/helpers";
 import Project from "./components/home/project";
 import Footer from "./components/home/footer";
 import About from "./components/home/about";
+import Contact from "./components/home/contact";
 
 function App() {
 	useEffect(() => Animation(), []);
@@ -17,10 +18,15 @@ function App() {
 				sparkCount={8}
 				duration={400}
 			>
-				<Landing />
-				<Project />
+				{/* <Landing /> */}
+				{/* <Project /> */}
 				<About />
+				<Contact />
 				<Footer />
+				<div
+					id="toast-container"
+					className="fixed bottom-10 right-5 z-50 space-y-3"
+				></div>
 			</ClickSpark>
 		</div>
 	);

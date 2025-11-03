@@ -34,7 +34,7 @@ function About() {
 				<LaserFlow
 					horizontalBeamOffset={-0.1}
 					verticalBeamOffset={-0.5}
-					color="#FF79C6"
+					color="#3b82f6"
 				/>
 			</div>
 

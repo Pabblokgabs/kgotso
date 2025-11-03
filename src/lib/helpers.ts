@@ -237,13 +237,24 @@ export const getStack = () => {
 	return stack;
 };
 
-export interface ChromaItem {
-	image: string;
-	title: string;
-	subtitle: string;
-	handle?: string;
-	location?: string;
-	borderColor?: string;
-	gradient?: string;
-	url?: string;
+export function showToast(message: string, type = "success") {
+	const toast = document.createElement("div");
+
+	const bgColor =
+		type === "success"
+			? "bg-green-500"
+			: type === "error"
+			? "bg-red-500"
+			: "bg-gray-700";
+
+	toast.className = `${bgColor} text-white px-4 py-3 rounded shadow-md animate-slide-in-right`;
+	toast.innerText = message;
+
+	const container = document.getElementById("toast-container");
+	if (container) container.appendChild(toast);
+
+	setTimeout(() => {
+		toast.classList.add("animate-fade-out");
+		setTimeout(() => toast.remove(), 300);
+	}, 3000);
 }
