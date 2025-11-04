@@ -5,18 +5,19 @@ import DarkVeil from "../DarkVeil";
 import Nav from "./navBar";
 import { startTyping, imageStyle } from "../../lib/helpers";
 import Button from "../Button";
-// import VariableProximity from "../Proximity";
+import VariableProximity from "../Proximity";
 
 function Landing() {
 	const revealImgRef = useRef<HTMLImageElement | null>(null);
-	// const containerRef = useRef<any>(null);
+	const containerRef = useRef<any>(null);
 
 	useEffect(() => {
 		startTyping();
 	}, []);
 
 	return (
-		<div
+		<section
+			id="home"
 			className="h-[80vh] w-full relative"
 			onMouseMove={(e) => {
 				const rect = e.currentTarget.getBoundingClientRect();
@@ -59,7 +60,7 @@ function Landing() {
 										>
 											React Developer
 										</div>
-										{/* <div className="relative" ref={containerRef}>
+										<div className="relative" ref={containerRef}>
 											<VariableProximity
 												label={
 													"I create exceptional digital experiences with modern web and mobile technologies. Passionate about clean code, beautiful interfaces, and scalable solutions that make a difference. Let's create something amazing together!"
@@ -71,7 +72,7 @@ function Landing() {
 												fromFontVariationSettings="'wght': 400, 'opsz': 9"
 												toFontVariationSettings="'wght': 1000, 'opsz': 40"
 											/>
-										</div> */}
+										</div>
 										<p className="text-neutral-400 text-pi">
 											I create exceptional digital experiences with modern web
 											and mobile technologies. Passionate about clean code,
@@ -112,7 +113,7 @@ function Landing() {
 				style={imageStyle}
 				className="pointer-events-none opacity-30"
 			/>
-		</div>
+		</section>
 	);
 }
 

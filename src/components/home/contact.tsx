@@ -9,9 +9,18 @@ function Contact() {
 		message: "",
 		subject: "",
 	});
-	const [isSubmiting, setIsSubmiting] = useState(true);
+	const [isSubmiting, setIsSubmiting] = useState(false);
 
 	const handleSubmit = async () => {
+		if (formData.email) {
+			const emailRegex =
+				/^(?:[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+)*|"[^"\\]*(\\.[^"\\]*)*")@(?:[a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}$/i;
+
+			if (!emailRegex.test(formData.email.trim())) {
+				showToast("Please enter a valid email address.", "error");
+				return;
+			}
+		}
 		if (!formData.email && !formData.name && !formData.message) {
 			return showToast("Please fill in all required fields.", "error");
 		} else if (!formData.email) {
@@ -20,13 +29,6 @@ function Contact() {
 			return showToast("Name is required.", "error");
 		} else if (!formData.message) {
 			return showToast("Message is required.", "error");
-		}
-		const emailRegex =
-			/^(?:[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+)*|"[^"\\]*(\\.[^"\\]*)*")@(?:[a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}$/i;
-
-		if (!emailRegex.test(formData.email.trim())) {
-			showToast("Please enter a valid email address.", "error");
-			return;
 		}
 
 		try {
@@ -59,6 +61,15 @@ function Contact() {
 			setIsSubmiting(false);
 		}
 	};
+
+	const handleValueChange = (e: any) => {
+		if (e) {
+			setFormData({
+				...formData,
+				[e.target.name]: e.target.value,
+			});
+		}
+	};
 	return (
 		<section
 			id="contact"
@@ -87,7 +98,7 @@ function Contact() {
 										</div>
 										<div>
 											<h4 className="font-medium mb-1">Email</h4>
-											<p className="text-gray-700">kgotsomasha1@gmail.com</p>
+											<p className="text-gray-500">kgotsomasha1@gmail.com</p>
 										</div>
 									</div>
 
@@ -97,7 +108,7 @@ function Contact() {
 										</div>
 										<div>
 											<h4 className="font-medium mb-1">Location</h4>
-											<p className="text-gray-700">
+											<p className="text-gray-500">
 												South Africa, Polokwane Limpopo
 											</p>
 										</div>
@@ -109,7 +120,7 @@ function Contact() {
 										</div>
 										<div>
 											<h4 className="font-medium mb-1">Availability</h4>
-											<p className="text-gray-700">
+											<p className="text-gray-500">
 												Monday - Friday, 9am - 6pm
 											</p>
 										</div>
@@ -123,7 +134,7 @@ function Contact() {
 											href="https://github.com/Pabblokgabs"
 											target="_blank"
 											rel="noopener noreferrer"
-											className="w-10 h-10 flex items-center justify-center bg-gray-100 text-gray-700 rounded-full hover:bg-[#3b82f6] hover:text-white transition-colors duration-300"
+											className="w-10 h-10 flex items-center justify-center bg-gray-100 text-gray-500 rounded-full hover:bg-[#3b82f6] hover:text-white transition-colors duration-300"
 										>
 											<i className="ri-github-fill"></i>
 										</a>
@@ -131,7 +142,7 @@ function Contact() {
 											href=""
 											target="_blank"
 											rel="noopener noreferrer"
-											className="w-10 h-10 flex items-center justify-center bg-gray-100 text-gray-700 rounded-full hover:bg-[#3b82f6] hover:text-white transition-colors duration-300"
+											className="w-10 h-10 flex items-center justify-center bg-gray-100 text-gray-500 rounded-full hover:bg-[#3b82f6] hover:text-white transition-colors duration-300"
 										>
 											<i className="ri-mail-fill text-xl"></i>
 										</a>
@@ -148,30 +159,33 @@ function Contact() {
 										<div>
 											<label
 												htmlFor="name"
-												className="block text-sm font-medium text-gray-700 mb-1"
+												className="block text-sm font-medium text-gray-400 mb-2"
 											>
 												Name
 											</label>
 											<input
+												value={formData.name}
+												onChange={(e) => handleValueChange(e)}
 												type="text"
 												id="name"
 												name="name"
-												className="w-full px-4 py-2 border border-gray-300 rounded focus:ring-2 focus:ring-primary focus:border-primary transition-colors duration-300"
+												className="w-full px-4 py-2 border border-gray-700 rounded focus:border-[#3b82f6] transition-colors duration-300"
 												placeholder="Your name"
 											/>
 										</div>
 										<div>
 											<label
 												htmlFor="email"
-												className="block text-sm font-medium text-gray-700 mb-1"
+												className="block text-sm font-medium text-gray-400 mb-2"
 											>
 												Email
 											</label>
 											<input
+												onChange={(e) => handleValueChange(e)}
 												type="email"
 												id="email"
 												name="email"
-												className="w-full px-4 py-2 border border-gray-300 rounded focus:ring-2 focus:ring-primary focus:border-primary transition-colors duration-300"
+												className="w-full px-4 py-2 border border-gray-700 rounded focus:border-[#3b82f6] transition-colors duration-300"
 												placeholder="Your email"
 											/>
 										</div>
@@ -180,15 +194,17 @@ function Contact() {
 									<div>
 										<label
 											htmlFor="subject"
-											className="block text-sm font-medium text-gray-700 mb-1"
+											className="block text-sm font-medium text-gray-400 mb-2"
 										>
 											Subject
 										</label>
+
 										<input
+											onChange={(e) => handleValueChange(e)}
 											type="text"
 											id="subject"
 											name="subject"
-											className="w-full px-4 py-2 border border-gray-300 rounded focus:ring-2 focus:ring-primary focus:border-primary transition-colors duration-300"
+											className="w-full px-4 py-2 border border-gray-700 rounded focus:border-[#3b82f6] transition-colors duration-300"
 											placeholder="Subject"
 										/>
 									</div>
@@ -196,15 +212,16 @@ function Contact() {
 									<div>
 										<label
 											htmlFor="message"
-											className="block text-sm font-medium text-gray-700 mb-1"
+											className="block text-sm font-medium text-gray-400 mb-2"
 										>
 											Message
 										</label>
 										<textarea
+											onChange={(e) => handleValueChange(e)}
 											id="message"
 											name="message"
 											rows={5}
-											className="w-full px-4 py-2 border border-gray-300 rounded focus:ring-2 focus:ring-primary focus:border-primary transition-colors duration-300"
+											className="w-full px-4 py-2 border border-gray-700 rounded focus:border-[#3b82f6] transition-colors duration-300"
 											placeholder="Your message"
 										></textarea>
 									</div>
@@ -218,7 +235,7 @@ function Contact() {
 										/>
 										<label
 											htmlFor="newsletter"
-											className="text-sm text-gray-700"
+											className="text-sm checked:bg-[#3b82f6]"
 										>
 											Subscribe to my newsletter for updates on new projects
 										</label>
@@ -229,8 +246,10 @@ function Contact() {
 										type="button"
 										onClick={handleSubmit}
 										className={`${
-											isSubmiting ? "cursor-not-allowed" : "cursor-pointer"
-										} px-6 py-3 bg-[#3b82f6] text-white font-medium whitespace-nowrap transition-all duration-300 hover:bg-blue-600 shadow-md hover:shadow-lg flex items-center`}
+											isSubmiting
+												? "cursor-not-allowed opacity-40"
+												: "cursor-pointer hover:bg-blue-600"
+										} px-6 py-3 bg-[#3b82f6] text-white font-medium whitespace-nowrap transition-all duration-300  shadow-md hover:shadow-lg flex items-center rounded-lg`}
 									>
 										{isSubmiting && <Loader className="animate-spin mr-2" />}
 
