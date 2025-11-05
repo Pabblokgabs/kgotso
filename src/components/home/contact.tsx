@@ -92,7 +92,7 @@ function Contact() {
 	};
 	return (
 		<section className="flex-1 bg-linear-to-b from-[#060010] to-gray-950">
-			<div className="container mx-auto h-full pt-0.5">
+			<div className="container mx-auto h-full pt-0.5 px-6">
 				<div className="lg:border-r lg:border-l md:rounded-t-[20px] py-30 lg:shadow-[-5px_-5px_10px_#3b82f6] overflow-hidden lg:border-t-4 lg:border-[#3b82f6] h-full lg:p-5 flex flex-col">
 					<div className="text-center mb-16 lg:mb-20 opacity-0 translate-y-[100px] transition-all duration-700 fade-in-up">
 						<h2 className="text-3xl md:text-4xl font-bold mb-4">
