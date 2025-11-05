@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 import heroImg from "../../assets/hero.png";
-import bg from "../../assets/bg.jpg";
+import bg from "../../assets/bg.png";
 import DarkVeil from "../DarkVeil";
 import Nav from "./navBar";
 import { startTyping, imageStyle } from "../../lib/helpers";
