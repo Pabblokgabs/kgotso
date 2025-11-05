@@ -24,7 +24,7 @@ function AboutCard() {
 						<ProfileCard
 							name="Kgotso Masha"
 							title="Fullstack Developer"
-							handle=""
+							handle="pabblokgabs"
 							status="Availabe"
 							contactText="Contact Me"
 							avatarUrl={prifileImg}

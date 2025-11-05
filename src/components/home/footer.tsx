@@ -1,7 +1,23 @@
-import { Github, Mail } from "lucide-react";
+import { useState } from "react";
+import { Mail } from "lucide-react";
+import { showToast } from "../../lib/helpers";
 
 function Footer() {
 	const year = new Date().getFullYear();
+
+	const [copied, setCopied] = useState(false);
+
+	const handleCopyEmail = async () => {
+		const email = "kgotsomasha1@gmail.com";
+		try {
+			await navigator.clipboard.writeText(email);
+			setCopied(true);
+			if (copied) showToast("Email copied successfully");
+			setTimeout(() => setCopied(false), 2000);
+		} catch (err) {
+			console.error("Failed to copy email:", err);
+		}
+	};
 
 	return (
 		<footer className="bg-gray-900 text-white py-12">
@@ -54,13 +70,11 @@ function Footer() {
 							rel="noopener noreferrer"
 							className="text-gray-400 hover:text-white transition-colors duration-300"
 						>
-							<Github />
+							<i className="ri-github-fill" />
 						</a>
 						<a
-							href=""
-							target="_blank"
-							rel="noopener noreferrer"
-							className="text-gray-400 hover:text-white transition-colors duration-300"
+							onClick={handleCopyEmail}
+							className="text-gray-400 cursor-pointer hover:text-white transition-colors duration-300"
 						>
 							<Mail />
 						</a>

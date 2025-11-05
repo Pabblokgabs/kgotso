@@ -5,9 +5,22 @@ import { ScrollFocusContext } from "../../context/ScrollFocusContext";
 
 function Contact() {
 	const context = useContext(ScrollFocusContext);
-	if (!context) throw new Error("Scroll to focus is not provided");
+	const [copied, setCopied] = useState(false);
 
+	if (!context) throw new Error("Scroll to focus is not provided");
 	const { nameInputRef } = context;
+
+	const handleCopyEmail = async () => {
+		const email = "kgotsomasha1@gmail.com";
+		try {
+			await navigator.clipboard.writeText(email);
+			setCopied(true);
+			if (copied) showToast("Email copied successfully");
+			setTimeout(() => setCopied(false), 2000);
+		} catch (err) {
+			console.error("Failed to copy email:", err);
+		}
+	};
 
 	const [formData, setFormData] = useState({
 		email: "",
@@ -39,12 +52,12 @@ function Contact() {
 
 		try {
 			setIsSubmiting(true);
-			const response = await fetch("https://formspree.io/f/mzzgqlpr", {
+			const response = await fetch("https://formspree.io/f/mwpwgpqb", {
 				method: "POST",
 				headers: {
 					Accept: "application/json",
 				},
-				body: formData,
+				body: JSON.stringify(formData),
 			});
 
 			if (response.ok) {
@@ -52,6 +65,7 @@ function Contact() {
 					"Thank you for your message! I’ll get back to you soon.",
 					"success"
 				);
+
 				setFormData({
 					email: "",
 					name: "",
@@ -77,11 +91,9 @@ function Contact() {
 		}
 	};
 	return (
-		<section
-			className="flex-1 bg-linear-to-b from-[#060010] to-gray-950"
-		>
+		<section className="flex-1 bg-linear-to-b from-[#060010] to-gray-950">
 			<div className="container mx-auto h-full pt-0.5">
-				<div className="lg:border-r lg:border-l md:rounded-t-[20px] py-20 lg:shadow-[-5px_-5px_10px_#3b82f6] overflow-hidden lg:border-t-4 lg:border-[#3b82f6] h-full lg:p-5 flex flex-col">
+				<div className="lg:border-r lg:border-l md:rounded-t-[20px] py-30 lg:shadow-[-5px_-5px_10px_#3b82f6] overflow-hidden lg:border-t-4 lg:border-[#3b82f6] h-full lg:p-5 flex flex-col">
 					<div className="text-center mb-16 lg:mb-20 opacity-0 translate-y-[100px] transition-all duration-700 fade-in-up">
 						<h2 className="text-3xl md:text-4xl font-bold mb-4">
 							Get In Touch
@@ -141,15 +153,13 @@ function Contact() {
 											rel="noopener noreferrer"
 											className="w-10 h-10 flex items-center justify-center bg-gray-100 text-gray-500 rounded-full hover:bg-[#3b82f6] hover:text-white transition-colors duration-300"
 										>
-											<i className="ri-github-fill"></i>
+											<i className="ri-github-fill" />
 										</a>
 										<a
-											href=""
-											target="_blank"
-											rel="noopener noreferrer"
-											className="w-10 h-10 flex items-center justify-center bg-gray-100 text-gray-500 rounded-full hover:bg-[#3b82f6] hover:text-white transition-colors duration-300"
+											onClick={handleCopyEmail}
+											className="w-10 h-10 flex items-center cursor-pointer justify-center bg-gray-100 text-gray-500 rounded-full hover:bg-[#3b82f6] hover:text-white transition-colors duration-300"
 										>
-											<i className="ri-mail-fill text-xl"></i>
+											<i className="ri-mail-fill text-xl" />
 										</a>
 									</div>
 								</div>
@@ -187,6 +197,7 @@ function Contact() {
 												Email
 											</label>
 											<input
+												value={formData.email}
 												onChange={(e) => handleValueChange(e)}
 												type="email"
 												id="email"
@@ -206,6 +217,7 @@ function Contact() {
 										</label>
 
 										<input
+											value={formData.subject}
 											onChange={(e) => handleValueChange(e)}
 											type="text"
 											id="subject"
@@ -223,6 +235,7 @@ function Contact() {
 											Message
 										</label>
 										<textarea
+											value={formData.message}
 											onChange={(e) => handleValueChange(e)}
 											id="message"
 											name="message"

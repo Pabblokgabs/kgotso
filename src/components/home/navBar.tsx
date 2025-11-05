@@ -44,7 +44,6 @@ function Nav() {
 										initialActiveIndex={0}
 										animationTime={600}
 										timeVariance={300}
-
 									/>
 								</li>
 							</ul>
@@ -54,17 +53,19 @@ function Nav() {
 				</header>
 			</div>
 
-			<div className="block lg:hidden"><BubbleMenu
-			logo={<span className="font-['Pacifico']">Kgotso Masha</span>}
-			items={items}
-			menuAriaLabel="Toggle navigation"
-			menuBg="#000000"
-			menuContentColor="#ffffff"
-			useFixedPosition={true}
-			animationEase="back.out(1.5)"
-			animationDuration={0.5}
-			staggerDelay={0.12}
-		/></div>
+			<div className="block lg:hidden">
+				<BubbleMenu
+					logo={<span className="font-['Pacifico']">Kgotso Masha</span>}
+					items={items}
+					menuAriaLabel="Toggle navigation"
+					menuBg="#a1a1a1"
+					menuContentColor="#ffffff"
+					useFixedPosition={true}
+					animationEase="back.out(1.5)"
+					animationDuration={0.5}
+					staggerDelay={0.12}
+				/>
+			</div>
 		</>
 	);
 }

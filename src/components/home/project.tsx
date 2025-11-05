@@ -46,7 +46,7 @@ function Project() {
 					))}
 				</div>
 
-				<ScrollArea className="w-96 block lg:hidden rounded-md my-10 whitespace-nowrap">
+				<ScrollArea className="flex-1 block lg:hidden rounded-md my-10 whitespace-nowrap">
 					<div className="flex w-max space-x-4 p-4">
 						{getStack().map((item, index) => (
 							<button

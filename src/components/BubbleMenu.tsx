@@ -357,6 +357,7 @@ export default function BubbleMenu({
                 ].join(' ')}
               >
                 <a
+                onClick={()=> setIsMenuOpen(false)}
                   role="menuitem"
                   href={item.href}
                   aria-label={item.ariaLabel || item.label}
