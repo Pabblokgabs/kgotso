@@ -3,6 +3,10 @@ let charIndex = 0;
 let isDeleting = false;
 let timerId: number | null = null;
 import img from "../assets/bg.jpg";
+import board from "../assets/game.png";
+import ecom from "../assets/cases.png";
+import elearn from "../assets/math.png";
+import confi from "../assets/confi.webp";
 
 const phrases = [
 	"React Developer",
@@ -154,7 +158,7 @@ export const projects: {
 	liveDemo: string;
 }[] = [
 	{
-		img: img,
+		img: ecom,
 		title: "E-commerce Platform",
 		stackUsed: ["React", "TypeScript", "Tailwind CSS", "Node.js"],
 		dataTags: "react typescript node",
@@ -164,7 +168,7 @@ export const projects: {
 		liveDemo: "https://luxcases.vercel.app",
 	},
 	{
-		img: img,
+		img: elearn,
 		title: "Math & Science Learning Platform",
 		stackUsed: ["HTML", "TypeScript", "Tailwind CSS"],
 		dataTags: "html javascript",
@@ -194,7 +198,7 @@ export const projects: {
 		liveDemo: "",
 	},
 	{
-		img: img,
+		img: board,
 		title: "Board games",
 		stackUsed: ["HTML", "JavaScript", "CSS"],
 		dataTags: "html javascript",
@@ -204,7 +208,7 @@ export const projects: {
 		liveDemo: "https://games-phi-nine.vercel.app",
 	},
 	{
-		img: img,
+		img: confi,
 		title: "Other Projects (Confidential)",
 		dataTags: "node javascript typescript html",
 		stackUsed: [
@@ -272,5 +276,5 @@ export const level = (num: number) => {
 		x = "Still learning";
 	}
 
-	return x
+	return x;
 };
