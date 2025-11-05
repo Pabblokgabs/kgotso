@@ -7,6 +7,7 @@ import board from "../assets/game.png";
 import ecom from "../assets/cases.png";
 import elearn from "../assets/math.png";
 import confi from "../assets/confi.webp";
+import ai from "../assets/ai.png";
 
 const phrases = [
 	"React Developer",
@@ -157,6 +158,17 @@ export const projects: {
 	github: string;
 	liveDemo: string;
 }[] = [
+	{
+		img: ai,
+		title: "Portfolio Analyser",
+		stackUsed: ["React", "TypeScript", "Tailwind CSS"],
+		dataTags: "react typescript tailwind portfolio analyser",
+		description:
+			"A web‑tool that analyses your portfolio and tells you if you stand out for a job — simply pasting your URL triggers AI‑powered insights and optimization recommendations.",
+		github: "https://github.com/Pabblokgabs/AiAnalyserFrondend",
+		liveDemo: "https://ai-url-analyser.vercel.app/",
+	},
+
 	{
 		img: ecom,
 		title: "E-commerce Platform",
