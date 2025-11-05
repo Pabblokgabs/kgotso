@@ -8,6 +8,7 @@ import ecom from "../assets/cases.png";
 import elearn from "../assets/math.png";
 import confi from "../assets/confi.webp";
 import ai from "../assets/ai.png";
+import mana from '../assets/mana.png'
 
 const phrases = [
 	"React Developer",
@@ -190,14 +191,14 @@ export const projects: {
 		liveDemo: "https://mathway-app.vercel.app",
 	},
 	{
-		img: img,
+		img: mana,
 		title: "Property Management System",
 		stackUsed: ["React", "CSS", "Node.js"],
 		dataTags: "react javascript node",
 		description:
 			"A full-stack web application for managing rental properties, tenants, and maintenance tasks. Includes features for listing properties, tracking leases, and managing communication between landlords and tenants.",
 		github: "https://github.com/Pabblokgabs/kgabsiN",
-		liveDemo: "",
+		liveDemo: "https://kgabs-in.vercel.app/",
 	},
 	{
 		img: img,
