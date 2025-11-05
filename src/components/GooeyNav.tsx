@@ -1,4 +1,5 @@
 import React, { useRef, useEffect, useState } from "react";
+import "../css/gooeyNav.css";
 
 interface GooeyNavItem {
 	label: string;
@@ -32,6 +33,35 @@ const GooeyNav: React.FC<GooeyNavProps> = ({
 	const textRef = useRef<HTMLSpanElement>(null);
 	const [activeIndex, setActiveIndex] = useState<number>(initialActiveIndex);
 
+	useEffect(() => {
+		const handleScroll = () => {
+			const sectionElements = items
+				.map((link) => document.querySelector<HTMLElement>(link.href))
+				.filter((el): el is HTMLElement => !!el);
+			const observer = new IntersectionObserver(
+				(entries) => {
+					entries.forEach((entry) => {
+						if (entry.isIntersecting) {
+							const index = sectionElements.findIndex(
+								(sec) => sec === entry.target
+							);
+							if (index !== -1) {
+								setActiveIndex(index);
+							}
+						}
+					});
+				},
+				{
+					root: null,
+					rootMargin: "0px 0px -60% 0px",
+					threshold: 0.2,
+				}
+			);
+			sectionElements.forEach((section) => observer.observe(section));
+			return () => observer.disconnect();
+		};
+		handleScroll();
+	}, [items, setActiveIndex]);
 	const noise = (n = 1) => n / 2 - Math.random() * n;
 	const getXY = (
 		distance: number,
@@ -186,8 +216,12 @@ const GooeyNav: React.FC<GooeyNavProps> = ({
             color: white;
             transition: color 0.3s ease;
           }
+          #nav-link:hover {
+            color: #3b82f6;
+            transition: color 0.3s ease;
+          }
           .effect.text.active {
-            color: black;
+            color: white;
           }
           .effect.filter {
             filter: blur(7px) contrast(100) blur(0);
@@ -198,13 +232,13 @@ const GooeyNav: React.FC<GooeyNavProps> = ({
             position: absolute;
             inset: -75px;
             z-index: -2;
-            background: black;
+            background: transparent;
           }
           .effect.filter::after {
             content: "";
             position: absolute;
             inset: 0;
-            background: white;
+            background: transparent;
             transform: scale(0);
             opacity: 0;
             z-index: -1;
@@ -287,7 +321,7 @@ const GooeyNav: React.FC<GooeyNavProps> = ({
             }
           }
           li.active {
-            color: black;
+            color: white;
             text-shadow: none;
           }
           li.active::after {
@@ -299,7 +333,7 @@ const GooeyNav: React.FC<GooeyNavProps> = ({
             position: absolute;
             inset: 0;
             border-radius: 8px;
-            background: white;
+            background: tranparent;
             opacity: 0;
             transform: scale(0);
             transition: all 0.3s ease;
@@ -323,15 +357,16 @@ const GooeyNav: React.FC<GooeyNavProps> = ({
 						{items.map((item, index) => (
 							<li
 								key={index}
-								className={`rounded-full relative cursor-pointer transition-[background-color_color_box-shadow] duration-300 ease shadow-[0_0_0.5px_1.5px_transparent] text-white ${
-									activeIndex === index ? "active" : ""
+								className={`rounded-full relative cursor-pointer transition-[background-color_color_box-shadow] duration-300 ease shadow-[0_0_0.5px_1.5px_transparent] ${
+									activeIndex === index ? "active text-[#3b82f6]" : "text-white"
 								}`}
 							>
 								<a
+									id="nav-link"
 									href={item.href}
 									onClick={(e) => handleClick(e, index)}
 									onKeyDown={(e) => handleKeyDown(e, index)}
-									className="outline-none py-[0.6em] px-[1em] inline-block"
+									className="outline-none inline-block"
 								>
 									{item.label}
 								</a>

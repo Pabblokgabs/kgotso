@@ -1,7 +1,15 @@
 import ProfileCard from "../ProfileCard";
-import prifileImg from "../../assets/confi.webp";
+import prifileImg from "../../assets/profile.png";
+import { useContext } from "react";
+import { ScrollFocusContext } from "../../context/ScrollFocusContext";
 
 function AboutCard() {
+	const context = useContext(ScrollFocusContext);
+
+	if (!context) throw new Error("ScrollFocusContext is not provided");
+
+	const { scrollToContact } = context;
+
 	return (
 		<div className="flex-1 h-full flex flex-col">
 			<div className="text-center mb-16 lg:mb-20 opacity-0 translate-y-[-100px] transition-all duration-700 fade-in-down">
@@ -10,8 +18,8 @@ function AboutCard() {
 					Get to know the person behind the code.
 				</p>
 			</div>
-			<div className="flex">
-				<div className="lg:flex-2 flex justify-center lg:justify-start">
+			<div className="flex flex-col lg:flex-row gap-10">
+				<div className="lg:flex-2 flex justify-center lg:justify-start fade-in-left opacity-0 translate-x-[-100px] transition-all duration-1000">
 					<div>
 						<ProfileCard
 							name="Kgotso Masha"
@@ -23,7 +31,7 @@ function AboutCard() {
 							showUserInfo={true}
 							enableTilt={true}
 							enableMobileTilt={false}
-							onContactClick={() => {}}
+							onContactClick={scrollToContact}
 							showBehindGradient={false}
 						/>
 					</div>
@@ -58,31 +66,31 @@ function AboutCard() {
 							<div className="bg-gray-50 p-4 rounded-lg">
 								<h4 className="font-bold text-gray-900 mb-2">Location</h4>
 								<p className="text-gray-500 flex items-center">
-									<i className="ri-map-pin-line mr-2 text-primary"></i>
-									<span>Tafelkop, Limpopo</span>
+									<i className="ri-map-pin-line mr-2 text-[#3b82f6]" />
+									<span>South Africa, Polokwane Limpopo</span>
 								</p>
 							</div>
 
 							<div className="bg-gray-50 p-4 rounded-lg">
 								<h4 className="font-bold text-gray-900 mb-2">Experience</h4>
 								<p className="text-gray-500 flex items-center">
-									<i className="ri-briefcase-line mr-2 text-primary"></i>
-									<span>4+ Years in Development</span>
+									<i className="ri-briefcase-line mr-2 text-[#3b82f6]" />
+									<span>3+ Years in Development</span>
 								</p>
 							</div>
 
 							<div className="bg-gray-50 p-4 rounded-lg">
 								<h4 className="font-bold text-gray-900 mb-2">Education</h4>
 								<p className="text-gray-500 flex items-center">
-									<i className="ri-book-open-line mr-2 text-primary"></i>
+									<i className="ri-book-open-line mr-2 text-[#3b82f6]" />
 									<span>Self-taught + Online Courses</span>
 								</p>
 							</div>
 
-							<div className="bg-gray-50 p-4 rounded-lg">
+							<div id="contact" className="bg-gray-50 p-4 rounded-lg">
 								<h4 className="font-bold text-gray-900 mb-2">Availability</h4>
 								<p className="text-gray-500 flex items-center">
-									<i className="ri-time-line mr-2 text-primary"></i>
+									<i className="ri-time-line mr-2 text-[#3b82f6]" />
 									<span>Open to New Projects</span>
 								</p>
 							</div>

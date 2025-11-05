@@ -16,7 +16,7 @@ const Button = ({
 		<StarBorder
 			as="button"
 			className={className}
-			color="blue"
+			color="#3b82f6"
 			speed="3s"
 			onClick={onclick}
 			thickness={5}

@@ -258,3 +258,19 @@ export function showToast(message: string, type = "success") {
 		setTimeout(() => toast.remove(), 300);
 	}, 3000);
 }
+
+export const level = (num: number) => {
+	if (typeof num != "number") return;
+	let x;
+	if (num >= 90) {
+		x = "Expect";
+	} else if (num >= 80) {
+		x = "Advanced";
+	} else if (num >= 70) {
+		x = "Intermediate";
+	} else {
+		x = "Still learning";
+	}
+
+	return x
+};

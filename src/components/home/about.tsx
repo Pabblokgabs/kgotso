@@ -38,8 +38,7 @@ function About() {
 				/>
 			</div>
 
-			{/* Content in normal flow so section height follows children */}
-			<div className="relative z-10 container mx-auto py-12">
+			<div className="relative z-10 container mx-auto pt-30 pb-20 px-6">
 				<AboutCard />
 			</div>
 		</section>

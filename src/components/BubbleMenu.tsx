@@ -96,7 +96,7 @@ export default function BubbleMenu({
     'flex items-center justify-between',
     'gap-4 px-8',
     'pointer-events-none',
-    'z-[1001]',
+    'z-[1001]', 'bg-white/5', 'backdrop-blur-lg',
     className
   ]
     .filter(Boolean)
@@ -182,7 +182,6 @@ export default function BubbleMenu({
 
   return (
     <>
-      {/* Workaround for silly Tailwind capabilities */}
       <style>{`
         .bubble-menu .menu-line {
           transition: transform 0.3s ease, opacity 0.3s ease;
@@ -241,18 +240,15 @@ export default function BubbleMenu({
           className={[
             'bubble logo-bubble',
             'inline-flex items-center justify-center',
-            'rounded-full',
-            'bg-white',
+            'bg-transparent',
             'shadow-[0_4px_16px_rgba(0,0,0,0.12)]',
             'pointer-events-auto',
             'h-12 md:h-14',
-            'px-4 md:px-8',
             'gap-2',
             'will-change-transform'
           ].join(' ')}
           aria-label="Logo"
           style={{
-            background: menuBg,
             minHeight: '48px',
             borderRadius: '9999px'
           }}
@@ -281,7 +277,7 @@ export default function BubbleMenu({
             isMenuOpen ? 'open' : '',
             'inline-flex flex-col items-center justify-center',
             'rounded-full',
-            'bg-white',
+            'bg-transparent',
             'shadow-[0_4px_16px_rgba(0,0,0,0.12)]',
             'pointer-events-auto',
             'w-12 h-12 md:w-14 md:h-14',
@@ -291,7 +287,6 @@ export default function BubbleMenu({
           onClick={handleToggle}
           aria-label={menuAriaLabel}
           aria-pressed={isMenuOpen}
-          style={{ background: menuBg }}
         >
           <span
             className="menu-line block mx-auto rounded-[2px]"
@@ -304,6 +299,16 @@ export default function BubbleMenu({
           />
           <span
             className="menu-line short block mx-auto rounded-[2px]"
+            style={{
+              marginTop: '6px',
+              width: 26,
+              height: 2,
+              background: menuContentColor,
+              transform: isMenuOpen ? 'translateY(-4px) rotate(-45deg)' : 'none'
+            }}
+          />
+          <span
+            className={`${isMenuOpen && 'hidden'} menu-line short block mx-auto rounded-[2px]`}
             style={{
               marginTop: '6px',
               width: 26,

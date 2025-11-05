@@ -1,10 +1,11 @@
+import { level } from "../../lib/helpers";
 import { next, skills } from "../../lib/options";
 import { Progress } from "../ui/progress";
 
 function Skills() {
 	return (
-		<section id="skills" className="bg-[#060010] flex-1">
-			<div className="container mx-auto h-full px-6">
+		<section id="skills" className="bg-[#060010] flex-1 px-6 pt-30 pb-1.5">
+			<div className="container mx-auto h-full ">
 				<div className="text-center mb-16 opacity-0 translate-y-[-100px] transition-all duration-700 fade-in-down">
 					<h2 className="text-4xl md:text-5xl font-bold dark:text-white mb-6">
 						Technical <span className="text-blue-600">Skills</span>
@@ -34,7 +35,7 @@ function Skills() {
 												{item.name}
 											</span>
 											<span className="text-gray-300 font-medium">
-												{item.level}
+												{level(item.percentage)}
 											</span>
 										</div>
 										<Progress
@@ -47,8 +48,8 @@ function Skills() {
 						</div>
 					))}
 				</div>
-				<div className="mt-16 text-center opacity-0 translate-y-[100px] transition-all duration-300 fade-in-up">
-					<div className="bg-linear-to-r from-gray-800 to-gray-700 rounded-2xl p-8">
+				<div className="mb-10 md:mb-0 mt-16 text-center opacity-0 translate-y-[100px]  transition-all duration-300 fade-in-up">
+					<div className="bg-linear-to-r from-gray-800 to-gray-700 lg:shadow-[0px_4px_10px_#3b82f6] rounded-2xl p-8">
 						<h3 className="text-2xl font-bold text-white mb-4">
 							Always Learning
 						</h3>

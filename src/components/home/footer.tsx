@@ -67,12 +67,11 @@ function Footer() {
 					</div>
 				</div>
 
-				<div className="border-t border-gray-800 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
-					<p id="all_rights" className="text-gray-400 text-sm mb-4 md:mb-0">
+				<div className="border-t border-gray-800 mt-8 pt-8 flex flex-col md:flex-row justify-center items-center">
+					<p className="text-gray-400 text-center text-sm mb-4 md:mb-0">
 						© {year} Kgotso Masha. All rights reserved. Portfolio done with
 						React + TypeScripe + Tailwind CSS
 					</p>
-
 					<div className="flex space-x-6"></div>
 				</div>
 			</div>

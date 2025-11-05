@@ -5,11 +5,9 @@ import DarkVeil from "../DarkVeil";
 import Nav from "./navBar";
 import { startTyping, imageStyle } from "../../lib/helpers";
 import Button from "../Button";
-import VariableProximity from "../Proximity";
 
 function Landing() {
 	const revealImgRef = useRef<HTMLImageElement | null>(null);
-	const containerRef = useRef<any>(null);
 
 	useEffect(() => {
 		startTyping();
@@ -46,11 +44,9 @@ function Landing() {
 					<div className="absolute inset-0 pointer-events-auto">
 						<div className="h-full container mx-auto">
 							<div className="flex-1 h-full">
-								<div className="flex-1 flex items-center justify-center mt-10">
-									<Nav />
-								</div>
-								<div className="flex-1 h-full py-10 flex flex-col md:flex-row gap-10 items-center">
-									<div className="flex-1 flex flex-col gap-4 fade-in-left opacity-0 translate-x-[-100px] transition-all duration-1000 ease-out">
+								<Nav />
+								<div className="flex-1 px-6 overflow-hidden h-full py-10 flex flex-col md:flex-row lg:gap-10 items-center justify-center ">
+									<div className="md:flex-1 flex flex-col gap-4 fade-in-left opacity-0 translate-x-[-100px] transition-all duration-1000 ease-out">
 										<h1 className="text-4xl md:text-5xl lg:text-6xl font-bold">
 											Full-Stack Developer
 										</h1>
@@ -59,19 +55,6 @@ function Landing() {
 											id="typing-text"
 										>
 											React Developer
-										</div>
-										<div className="relative" ref={containerRef}>
-											<VariableProximity
-												label={
-													"I create exceptional digital experiences with modern web and mobile technologies. Passionate about clean code, beautiful interfaces, and scalable solutions that make a difference. Let's create something amazing together!"
-												}
-												className="variable-proximity-demo"
-												containerRef={containerRef}
-												radius={100}
-												falloff="linear"
-												fromFontVariationSettings="'wght': 400, 'opsz': 9"
-												toFontVariationSettings="'wght': 1000, 'opsz': 40"
-											/>
 										</div>
 										<p className="text-neutral-400 text-pi">
 											I create exceptional digital experiences with modern web
@@ -92,11 +75,11 @@ function Landing() {
 											</a>
 										</div>
 									</div>
-									<div className="flex-1 flex justify-center fade-in-right opacity-0 translate-x-[100px] transition-all duration-1000 ease-out">
+									<div className="flex-1 hidden md:flex justify-center fade-in-right opacity-0 translate-x-[100px] transition-all duration-1000 ease-out">
 										<img
 											src={heroImg}
 											alt="Developer Illustration"
-											className="w-full pointer-events-none select-none max-w-lg rounded-lg shadow-xl object-cover object-top"
+											className="w-full pointer-events-none select-none md:max-w-lg rounded-lg shadow-xl object-cover object-top"
 										/>
 									</div>
 								</div>

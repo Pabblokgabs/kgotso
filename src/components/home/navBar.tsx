@@ -1,16 +1,10 @@
 import GooeyNav from "../GooeyNav";
 import { useEffect, useState, useRef } from "react";
 import { Menu } from "lucide-react";
+import { items, NAV_LIST } from "../../lib/options";
+import BubbleMenu from "../BubbleMenu";
 
 function Nav() {
-	const NAV_LIST: { label: string; href: string }[] = [
-		{ label: "Home", href: "#home" },
-		{ label: "Projects", href: "#projects" },
-		{ label: "Skills", href: "#skills" },
-		{ label: "About", href: "#about" },
-		{ label: "Contact", href: "#contact" },
-	];
-
 	const [scrolled, setScrolled] = useState(false);
 
 	useEffect(() => {
@@ -24,42 +18,54 @@ function Nav() {
 	}, []);
 
 	return (
-		<header
-			className={`fixed container px-auto top-4 left-1/2 transform  border border-white/10 -translate-x-1/2 z-50 transition-all duration-300 ease-in-out ${
-				scrolled ? "backdrop-blur-md bg-white/5" : "bg-transparent"
-			} rounded-full`}
-			style={{
-				WebkitBackdropFilter: scrolled ? "blur(6px)" : undefined,
-				backdropFilter: scrolled ? "blur(6px)" : undefined,
-			}}
-		>
-			<div className="flex flex-row items-center gap-2.5 justify-between py-4 px-2.5 lg:px-7">
-				<h2 className="lg:text-2xl font-['Pacifico'] text-primary">
-					Kgotso Masha
-				</h2>
-				<nav>
-					<ul className="hidden md:block">
-						<li className="flex gap-4">
-							<GooeyNav
-								items={NAV_LIST}
-								particleCount={15}
-								particleDistances={[90, 10]}
-								particleR={100}
-								initialActiveIndex={0}
-								animationTime={600}
-								timeVariance={300}
-							/>
-						</li>
-					</ul>
+		<>
+			<div className="hidden lg:block">
+				<header
+					className={`fixed container px-auto top-10 left-1/2 transform  border border-white/10 -translate-x-1/2 z-50 transition-all duration-300 ease-in-out overflow-hidden ${
+						scrolled ? "backdrop-blur-lg bg-white/10" : "bg-transparent"
+					} rounded-full`}
+					style={{
+						WebkitBackdropFilter: scrolled ? "blur(6px)" : undefined,
+						backdropFilter: scrolled ? "blur(6px)" : undefined,
+					}}
+				>
+					<div className="flex flex-row items-center gap-2.5 justify-between py-4 px-2.5 lg:px-7">
+						<h2 className="lg:text-2xl font-['Pacifico'] text-primary">
+							Kgotso Masha
+						</h2>
+						<nav>
+							<ul className="hidden md:block">
+								<li className="flex gap-4">
+									<GooeyNav
+										items={NAV_LIST}
+										particleCount={15}
+										particleDistances={[90, 10]}
+										particleR={100}
+										initialActiveIndex={0}
+										animationTime={600}
+										timeVariance={300}
 
-					<ul className="block md:hidden">
-						<li>
+									/>
+								</li>
+							</ul>
 							<MobileMenuButton navList={NAV_LIST} />
-						</li>
-					</ul>
-				</nav>
+						</nav>
+					</div>
+				</header>
 			</div>
-		</header>
+
+			<div className="block lg:hidden"><BubbleMenu
+			logo={<span className="font-['Pacifico']">Kgotso Masha</span>}
+			items={items}
+			menuAriaLabel="Toggle navigation"
+			menuBg="#000000"
+			menuContentColor="#ffffff"
+			useFixedPosition={true}
+			animationEase="back.out(1.5)"
+			animationDuration={0.5}
+			staggerDelay={0.12}
+		/></div>
+		</>
 	);
 }
 
@@ -85,7 +91,7 @@ function MobileMenuButton({
 	}, []);
 
 	return (
-		<div className="relative" ref={ref}>
+		<div className="relative block md:hidden" ref={ref}>
 			<button
 				aria-label="Open navigation"
 				onClick={() => setOpen((s) => !s)}

@@ -52,7 +52,7 @@ const StarBorder = <T extends React.ElementType = "button">({
 					btnColor
 						? btnColor
 						: "bg-linear-to-b hover:bg-linear-to-t text-white from-black to-gray-900"
-				} border border-gray-800  text-center text-[16px] py-4 px-[26px] rounded-[20px] hover:bg-linear-to-b hover:from-blue-800 hover:to-indigo-950`}
+				} border border-gray-800 cursor-pointer text-center text-[16px] py-4 px-[26px] rounded-[20px] hover:bg-linear-to-b hover:from-blue-800 hover:to-indigo-950`}
 			>
 				{children}
 			</div>

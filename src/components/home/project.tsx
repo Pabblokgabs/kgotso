@@ -2,6 +2,7 @@ import { useState } from "react";
 import { projects, getStack } from "../../lib/helpers";
 import MagicBento from "../MagicBento";
 import { ArrowRight, Github } from "lucide-react";
+import { ScrollArea, ScrollBar } from "../../components/ui/scroll-area";
 
 function Project() {
 	const [active, setActive] = useState<string>("All Projects");
@@ -18,10 +19,10 @@ function Project() {
 	return (
 		<section
 			id="projects"
-			className="flex-1 relative overflow-hidden py-10 bg-linear-to-b from-balck to-neutral-950"
+			className="flex-1 relative overflow-hidden px-6 pt-30 pb-20 bg-linear-to-b from- to-neutral-950"
 		>
 			<div className="container mx-auto">
-				<div className="text-center mb-16 opacity-0 translate-y-[-100px] transition-all duration-700 fade-in-down">
+				<div className="text-center lg:mb-16 opacity-0 translate-y-[-100px] transition-all duration-300 fade-in-down">
 					<h2 className="text-3xl md:text-4xl font-bold mb-4">
 						Featured Projects
 					</h2>
@@ -31,7 +32,7 @@ function Project() {
 					</p>
 				</div>
 
-				<div className="flex flex-wrap justify-center gap-3 mb-12 opacity-0 translate-y-[100px] transition-all duration-700 fade-in-up">
+				<div className="hidden lg:flex flex-wrap justify-center gap-3 mb-12 opacity-0 translate-y-[100px] transition-all duration-300 fade-in-up">
 					{getStack().map((item, index) => (
 						<button
 							onClick={() => setActive(item)}
@@ -44,6 +45,23 @@ function Project() {
 						</button>
 					))}
 				</div>
+
+				<ScrollArea className="w-96 block lg:hidden rounded-md my-10 whitespace-nowrap">
+					<div className="flex w-max space-x-4 p-4">
+						{getStack().map((item, index) => (
+							<button
+								onClick={() => setActive(item)}
+								key={`${index}-${item}`}
+								className={`active px-4 py-2 rounded-lg whitespace-nowrap ${
+									active === item ? "bg-[#3b82f6]" : "border-b-blue-950"
+								} text-white font-medium transition-all duration-300 border-2 cursor-pointer hover:border-[#3b82f6]`}
+							>
+								{item}
+							</button>
+						))}
+					</div>
+					<ScrollBar orientation="horizontal" />
+				</ScrollArea>
 				<div className="flex-1">
 					<div
 						className={`${

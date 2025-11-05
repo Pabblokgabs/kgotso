@@ -1,8 +1,14 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { showToast } from "../../lib/helpers";
 import { Loader } from "lucide-react";
+import { ScrollFocusContext } from "../../context/ScrollFocusContext";
 
 function Contact() {
+	const context = useContext(ScrollFocusContext);
+	if (!context) throw new Error("Scroll to focus is not provided");
+
+	const { nameInputRef } = context;
+
 	const [formData, setFormData] = useState({
 		email: "",
 		name: "",
@@ -72,12 +78,11 @@ function Contact() {
 	};
 	return (
 		<section
-			id="contact"
 			className="flex-1 bg-linear-to-b from-[#060010] to-gray-950"
 		>
-			<div className="container mx-auto h-full">
-				<div className="lg:border-r lg:border-l md:rounded-t-[20px] overflow-hidden lg:border-t-4 lg:border-[#3b82f6] h-full p-5 flex flex-col">
-					<div className="text-center mb-16 lg:mb-20 opacity-0 translate-y-[-100px] transition-all duration-700 fade-in-down">
+			<div className="container mx-auto h-full pt-0.5">
+				<div className="lg:border-r lg:border-l md:rounded-t-[20px] py-20 lg:shadow-[-5px_-5px_10px_#3b82f6] overflow-hidden lg:border-t-4 lg:border-[#3b82f6] h-full lg:p-5 flex flex-col">
+					<div className="text-center mb-16 lg:mb-20 opacity-0 translate-y-[100px] transition-all duration-700 fade-in-up">
 						<h2 className="text-3xl md:text-4xl font-bold mb-4">
 							Get In Touch
 						</h2>
@@ -86,7 +91,7 @@ function Contact() {
 							from you!
 						</p>
 					</div>
-					<div className="flex flex-col lg:flex-row gap-12">
+					<div className="flex flex-col-reverse lg:flex-row gap-12">
 						<div className="w-full lg:w-1/3 order-2 md:order-1 opacity-0 translate-x-[-100px] transition-all duration-700 fade-in-left">
 							<div className="bg-gray-900 p-8 rounded-lg shadow-md">
 								<h3 className="text-xl font-bold mb-6">Contact Information</h3>
@@ -164,6 +169,7 @@ function Contact() {
 												Name
 											</label>
 											<input
+												ref={nameInputRef}
 												value={formData.name}
 												onChange={(e) => handleValueChange(e)}
 												type="text"
