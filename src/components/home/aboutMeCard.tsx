@@ -43,7 +43,7 @@ function AboutCard() {
 							I'm a self-taught full-stack developer with a passion for creating
 							elegant, efficient, and user-friendly web applications. My journey
 							into coding began 5 years ago when I decided to switch careers
-							from a university student, My real education came from building
+							from a university student. My real education came from freelancing, building
 							countless projects and solving complex problems.
 						</p>
 

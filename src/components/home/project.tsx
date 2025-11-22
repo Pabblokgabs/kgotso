@@ -1,8 +1,9 @@
 import { useState } from "react";
-import { projects, getStack } from "../../lib/helpers";
+import { getStack } from "../../lib/helpers";
 import MagicBento from "../MagicBento";
 import { ArrowRight, Github } from "lucide-react";
 import { ScrollArea, ScrollBar } from "../../components/ui/scroll-area";
+import { projects } from "../../lib/options";
 
 function Project() {
 	const [active, setActive] = useState<string>("All Projects");
@@ -37,9 +38,8 @@ function Project() {
 						<button
 							onClick={() => setActive(item)}
 							key={`${index}-${item}`}
-							className={`active px-4 py-2 rounded-lg whitespace-nowrap ${
-								active === item ? "bg-[#3b82f6]" : "border-b-blue-950"
-							} text-white font-medium transition-all duration-300 border-2 cursor-pointer hover:border-[#3b82f6]`}
+							className={`active px-4 py-2 rounded-lg whitespace-nowrap ${active === item ? "bg-[#3b82f6]" : "border-b-blue-950"
+								} text-white font-medium transition-all duration-300 border-2 cursor-pointer hover:border-[#3b82f6]`}
 						>
 							{item}
 						</button>
@@ -52,9 +52,8 @@ function Project() {
 							<button
 								onClick={() => setActive(item)}
 								key={`${index}-${item}`}
-								className={`active px-4 py-2 rounded-lg whitespace-nowrap ${
-									active === item ? "bg-[#3b82f6]" : "border-b-blue-950"
-								} text-white font-medium transition-all duration-300 border-2 cursor-pointer hover:border-[#3b82f6]`}
+								className={`active px-4 py-2 rounded-lg whitespace-nowrap ${active === item ? "bg-[#3b82f6]" : "border-b-blue-950"
+									} text-white font-medium transition-all duration-300 border-2 cursor-pointer hover:border-[#3b82f6]`}
 							>
 								{item}
 							</button>
@@ -64,11 +63,10 @@ function Project() {
 				</ScrollArea>
 				<div className="flex-1">
 					<div
-						className={`${
-							filter().length > 0 &&
+						className={`${filter().length > 0 &&
 							filter() &&
 							"grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 opacity-0 translate-y-[100px] transition-all duration-300 fade-in-up"
-						}`}
+							}`}
 					>
 						{filter().length > 0 && filter() ? (
 							filter().map((item, i) => (

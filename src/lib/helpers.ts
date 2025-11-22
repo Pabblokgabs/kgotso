@@ -2,13 +2,7 @@ let phraseIndex = 0;
 let charIndex = 0;
 let isDeleting = false;
 let timerId: number | null = null;
-import img from "../assets/bg.jpg";
-import board from "../assets/game.png";
-import ecom from "../assets/cases.png";
-import elearn from "../assets/math.png";
-import confi from "../assets/confi.webp";
-import ai from "../assets/ai.png";
-import mana from '../assets/mana.png'
+import { projects } from "./options";
 
 const phrases = [
 	"React Developer",
@@ -144,101 +138,6 @@ export const Animation = () => {
 			observer.observe(el);
 		});
 };
-
-// fade-in-right opacity-0 translate-x-[100px] transition-all duration-1000 ease-out
-// opacity-0 translate-y-[-100px] transition-all duration-700 fade-in-down
-// opacity-0 translate-y-[100px] transition-all duration-700 fade-in-up
-// fade-in-left opacity-0 translate-x-[-100px] transition-all duration-1000 ease-out
-
-export const projects: {
-	img: string;
-	title: string;
-	stackUsed: string[];
-	dataTags: string;
-	description: string;
-	github: string;
-	liveDemo: string;
-}[] = [
-	{
-		img: ai,
-		title: "Portfolio Analyser",
-		stackUsed: ["React", "TypeScript", "Tailwind CSS"],
-		dataTags: "react typescript tailwind portfolio analyser",
-		description:
-			"A web‑tool that analyses your portfolio and tells you if you stand out for a job — simply pasting your URL triggers AI‑powered insights and optimization recommendations.",
-		github: "https://github.com/Pabblokgabs/AiAnalyserFrondend",
-		liveDemo: "https://ai-url-analyser.vercel.app/",
-	},
-
-	{
-		img: ecom,
-		title: "E-commerce Platform",
-		stackUsed: ["React", "TypeScript", "Tailwind CSS", "Node.js"],
-		dataTags: "react typescript node",
-		description:
-			"A feature-rich website for selling custom phone cases with real-time photo uploads, mobile model selection, and instant previews of how your design will look on the case.",
-		github: "https://github.com/Pabblokgabs/luxcases",
-		liveDemo: "https://luxcases.vercel.app",
-	},
-	{
-		img: elearn,
-		title: "Math & Science Learning Platform",
-		stackUsed: ["HTML", "TypeScript", "Tailwind CSS"],
-		dataTags: "html javascript",
-		description:
-			"A work-in-progress learning website focused on helping Grade 10–12 learners across South Africa study math and science online. Built with HTML, Tailwind CSS and JavaScript for a fast, responsive experience.",
-		github: "https://github.com/Pabblokgabs/mathway-app",
-		liveDemo: "https://mathway-app.vercel.app",
-	},
-	{
-		img: mana,
-		title: "Property Management System",
-		stackUsed: ["React", "CSS", "Node.js"],
-		dataTags: "react javascript node",
-		description:
-			"A full-stack web application for managing rental properties, tenants, and maintenance tasks. Includes features for listing properties, tracking leases, and managing communication between landlords and tenants.",
-		github: "https://github.com/Pabblokgabs/kgabsiN",
-		liveDemo: "https://kgabs-in.vercel.app/",
-	},
-	{
-		img: img,
-		title: "Collaborative Blogging Platform",
-		stackUsed: ["React", "TypeScript", "Tailwind CSS", "Node.js"],
-		dataTags: "react node express",
-		description:
-			"A modern blogging app built in collaboration with other developers. Features include user authentication, rich text post creation, comments, and a clean, responsive UI for reading and writing blogs.",
-		github: "https://github.com/Pabblokgabs/mern-blogging-website",
-		liveDemo: "",
-	},
-	{
-		img: board,
-		title: "Board games",
-		stackUsed: ["HTML", "JavaScript", "CSS"],
-		dataTags: "html javascript",
-		description:
-			"A creative board game demo showcasing front-end skills using pure HTML, CSS, and JavaScript.",
-		github: "https://github.com/Pabblokgabs/boardGames",
-		liveDemo: "https://games-phi-nine.vercel.app",
-	},
-	{
-		img: confi,
-		title: "Other Projects (Confidential)",
-		dataTags: "node javascript typescript html",
-		stackUsed: [
-			"JavaScript",
-			"TypeScript",
-			"Tailwind CSS",
-			"Node.js",
-			"React",
-			"Next",
-			"Python",
-		],
-		description:
-			"Involved in several additional projects ranging from internal tools to client-specific solutions. Due to confidentiality agreements or incomplete status, these projects cannot be publicly showcased but contributed significantly to my experience.",
-		github: "",
-		liveDemo: "",
-	},
-];
 
 export const getStack = () => {
 	const stack: string[] = ["All Projects"];
