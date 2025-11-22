@@ -1,13 +1,19 @@
-import { useEffect, useRef } from "react";
+import { useContext, useEffect, useRef } from "react";
 import heroImg from "../../assets/hero.png";
 import bg from "../../assets/bg.png";
 import DarkVeil from "../DarkVeil";
 import Nav from "./navBar";
 import { startTyping, imageStyle } from "../../lib/helpers";
 import Button from "../Button";
+import { ScrollFocusContext } from "../../context/ScrollFocusContext";
 
 function Landing() {
 	const revealImgRef = useRef<HTMLImageElement | null>(null);
+	const context = useContext(ScrollFocusContext);
+
+	if (!context) throw new Error("ScrollFocusContext is not provided");
+
+	const { scrollToContact } = context;
 
 	useEffect(() => {
 		startTyping();
@@ -66,7 +72,7 @@ function Landing() {
 											<a href="#projects">
 												<Button Children={"View Projects"} className="" />
 											</a>
-											<a href="#contact">
+											<a onClick={scrollToContact}>
 												<Button
 													Children={"Get in Touch"}
 													className=""

@@ -1,95 +1,24 @@
-import { useState, useContext } from "react";
-import { showToast } from "../../lib/helpers";
+import { useContext, useState } from "react";
 import { Loader } from "lucide-react";
 import { ScrollFocusContext } from "../../context/ScrollFocusContext";
+import { handleSubmit, handleValueChange, handleCopyEmail } from "../../lib/api";
 
 function Contact() {
-	const context = useContext(ScrollFocusContext);
-	const [copied, setCopied] = useState(false);
-
-	if (!context) throw new Error("Scroll to focus is not provided");
-	const { nameInputRef } = context;
-
-	const handleCopyEmail = async () => {
-		const email = "kgotsomasha1@gmail.com";
-		try {
-			await navigator.clipboard.writeText(email);
-			setCopied(true);
-			if (copied) showToast("Email copied successfully");
-			setTimeout(() => setCopied(false), 2000);
-		} catch (err) {
-			console.error("Failed to copy email:", err);
-		}
-	};
-
 	const [formData, setFormData] = useState({
 		email: "",
 		name: "",
 		message: "",
 		subject: "",
 	});
+
 	const [isSubmiting, setIsSubmiting] = useState(false);
+	const [copied, setCopied] = useState(false);
 
-	const handleSubmit = async () => {
-		if (formData.email) {
-			const emailRegex =
-				/^(?:[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+)*|"[^"\\]*(\\.[^"\\]*)*")@(?:[a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}$/i;
+	const context = useContext(ScrollFocusContext);
 
-			if (!emailRegex.test(formData.email.trim())) {
-				showToast("Please enter a valid email address.", "error");
-				return;
-			}
-		}
-		if (!formData.email && !formData.name && !formData.message) {
-			return showToast("Please fill in all required fields.", "error");
-		} else if (!formData.email) {
-			return showToast("Email address is required.", "error");
-		} else if (!formData.name) {
-			return showToast("Name is required.", "error");
-		} else if (!formData.message) {
-			return showToast("Message is required.", "error");
-		}
+	if (!context) throw new Error("Scroll to focus is not provided");
+	const { nameInputRef } = context;
 
-		try {
-			setIsSubmiting(true);
-			const response = await fetch("https://formspree.io/f/mwpwgpqb", {
-				method: "POST",
-				headers: {
-					Accept: "application/json",
-				},
-				body: JSON.stringify(formData),
-			});
-
-			if (response.ok) {
-				showToast(
-					"Thank you for your message! I’ll get back to you soon.",
-					"success"
-				);
-
-				setFormData({
-					email: "",
-					name: "",
-					message: "",
-					subject: "",
-				});
-			} else {
-				showToast("Failed to send. Please try again later.", "error");
-			}
-		} catch (error) {
-			showToast("Something went wrong. Please try again later.", "error");
-		} finally {
-			setIsSubmiting(false);
-		}
-	};
-
-	const handleValueChange = (e: any) => {
-		if (e) {
-			setFormData({
-				...formData,
-				[e.target.name]: e.target.value,
-			});
-		}
-	};
 	return (
 		<section className="flex-1 bg-linear-to-b from-[#060010] to-gray-950">
 			<div className="container mx-auto h-full pt-0.5 px-6">
@@ -103,7 +32,7 @@ function Contact() {
 							from you!
 						</p>
 					</div>
-					<div className="flex flex-col-reverse lg:flex-row gap-12">
+					<div className="flex flex-col lg:flex-row gap-12">
 						<div className="w-full lg:w-1/3 order-2 md:order-1 opacity-0 translate-x-[-100px] transition-all duration-700 fade-in-left">
 							<div className="bg-gray-900 p-8 rounded-lg shadow-md">
 								<h3 className="text-xl font-bold mb-6">Contact Information</h3>
@@ -156,7 +85,7 @@ function Contact() {
 											<i className="ri-github-fill" />
 										</a>
 										<a
-											onClick={handleCopyEmail}
+											onClick={() => handleCopyEmail(setCopied, copied)}
 											className="w-10 h-10 flex items-center cursor-pointer justify-center bg-gray-100 text-gray-500 rounded-full hover:bg-[#3b82f6] hover:text-white transition-colors duration-300"
 										>
 											<i className="ri-mail-fill text-xl" />
@@ -181,7 +110,7 @@ function Contact() {
 											<input
 												ref={nameInputRef}
 												value={formData.name}
-												onChange={(e) => handleValueChange(e)}
+												onChange={(e) => handleValueChange(e, formData, setFormData)}
 												type="text"
 												id="name"
 												name="name"
@@ -198,7 +127,7 @@ function Contact() {
 											</label>
 											<input
 												value={formData.email}
-												onChange={(e) => handleValueChange(e)}
+												onChange={(e) => handleValueChange(e, formData, setFormData)}
 												type="email"
 												id="email"
 												name="email"
@@ -218,7 +147,7 @@ function Contact() {
 
 										<input
 											value={formData.subject}
-											onChange={(e) => handleValueChange(e)}
+											onChange={(e) => handleValueChange(e, formData, setFormData)}
 											type="text"
 											id="subject"
 											name="subject"
@@ -236,7 +165,7 @@ function Contact() {
 										</label>
 										<textarea
 											value={formData.message}
-											onChange={(e) => handleValueChange(e)}
+											onChange={(e) => handleValueChange(e, formData, setFormData)}
 											id="message"
 											name="message"
 											rows={5}
@@ -263,12 +192,11 @@ function Contact() {
 									<button
 										disabled={isSubmiting}
 										type="button"
-										onClick={handleSubmit}
-										className={`${
-											isSubmiting
-												? "cursor-not-allowed opacity-40"
-												: "cursor-pointer hover:bg-blue-600"
-										} px-6 py-3 bg-[#3b82f6] text-white font-medium whitespace-nowrap transition-all duration-300  shadow-md hover:shadow-lg flex items-center rounded-lg`}
+										onClick={() => handleSubmit(formData, setFormData, setIsSubmiting)}
+										className={`${isSubmiting
+											? "cursor-not-allowed opacity-40"
+											: "cursor-pointer hover:bg-blue-600"
+											} px-6 py-3 bg-[#3b82f6] text-white font-medium whitespace-nowrap transition-all duration-300  shadow-md hover:shadow-lg flex items-center rounded-lg`}
 									>
 										{isSubmiting && <Loader className="animate-spin mr-2" />}
 
