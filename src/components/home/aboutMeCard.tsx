@@ -2,6 +2,7 @@ import ProfileCard from "../ProfileCard";
 import prifileImg from "../../assets/profile.png";
 import { useContext } from "react";
 import { ScrollFocusContext } from "../../context/ScrollFocusContext";
+import { BookOpen, BriefcaseBusiness, ClockIcon, MapPin } from "lucide-react";
 
 function AboutCard() {
 	const context = useContext(ScrollFocusContext);
@@ -66,15 +67,15 @@ function AboutCard() {
 							<div className="bg-gray-50 p-4 rounded-lg">
 								<h4 className="font-bold text-gray-900 mb-2">Location</h4>
 								<p className="text-gray-500 flex items-center">
-									<i className="ri-map-pin-line mr-2 text-[#3b82f6]" />
-									<span>South Africa, Polokwane Limpopo</span>
+									<MapPin className="mr-2 text-[#3b82f6]" />
+									<span>South Africa, Polokwane</span>
 								</p>
 							</div>
 
 							<div className="bg-gray-50 p-4 rounded-lg">
 								<h4 className="font-bold text-gray-900 mb-2">Experience</h4>
 								<p className="text-gray-500 flex items-center">
-									<i className="ri-briefcase-line mr-2 text-[#3b82f6]" />
+									<BriefcaseBusiness className="mr-2 text-[#3b82f6]" />
 									<span>3+ Years in Development</span>
 								</p>
 							</div>
@@ -82,7 +83,7 @@ function AboutCard() {
 							<div className="bg-gray-50 p-4 rounded-lg">
 								<h4 className="font-bold text-gray-900 mb-2">Education</h4>
 								<p className="text-gray-500 flex items-center">
-									<i className="ri-book-open-line mr-2 text-[#3b82f6]" />
+									<BookOpen className="mr-2 text-[#3b82f6]" />
 									<span>Self-taught + Online Courses</span>
 								</p>
 							</div>
@@ -90,7 +91,7 @@ function AboutCard() {
 							<div id="contact" className="bg-gray-50 p-4 rounded-lg">
 								<h4 className="font-bold text-gray-900 mb-2">Availability</h4>
 								<p className="text-gray-500 flex items-center">
-									<i className="ri-time-line mr-2 text-[#3b82f6]" />
+									<ClockIcon className="mr-2 text-[#3b82f6]" />
 									<span>Open to New Projects</span>
 								</p>
 							</div>

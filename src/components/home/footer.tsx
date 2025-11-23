@@ -1,11 +1,11 @@
-import { useState } from "react";
 import { Mail } from "lucide-react";
 import { showToast } from "../../lib/helpers";
+import { UseFormContext } from "../../context/formContext";
 
 function Footer() {
 	const year = new Date().getFullYear();
 
-	const [copied, setCopied] = useState(false);
+	const { copied, setCopied } = UseFormContext();
 
 	const handleCopyEmail = async () => {
 		const email = "kgotsomasha1@gmail.com";

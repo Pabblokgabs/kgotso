@@ -33,6 +33,7 @@ function ensureCaretStyle() {
 	document.head.appendChild(style);
 	caretStyleInjected = true;
 }
+
 export function TypeText() {
 	const typingElement = document.getElementById("typing-text");
 
@@ -189,4 +190,25 @@ export const level = (num: number) => {
 	}
 
 	return x;
+};
+
+export const handleValueChange = (
+	e: any,
+	formData: formDataType,
+	setFormData: React.Dispatch<React.SetStateAction<formDataType>>,
+	setError: React.Dispatch<React.SetStateAction<errorType>>,
+	error: errorType
+) => {
+	if (e) {
+		console.log(e.target.value);
+		setError({
+			...error,
+			[e.target.name]: false,
+		});
+
+		setFormData({
+			...formData,
+			[e.target.name]: e.target.value,
+		});
+	}
 };

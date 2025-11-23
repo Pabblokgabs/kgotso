@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import React, { createContext, useRef } from "react";
+import React, { createContext, useContext, useRef } from "react";
 
 interface ScrollFocusContextType {
 	nameInputRef: React.RefObject<HTMLInputElement>;
@@ -55,3 +55,13 @@ export const ScrollFocusProvider: React.FC<Props> = ({ children }) => {
 		</ScrollFocusContext.Provider>
 	);
 };
+
+export const UseScrollContext = () => {
+	const context = useContext(ScrollFocusContext);
+	if (!context) {
+		throw new Error("ScrollFocusContext is not provided");
+	}
+	return context;
+};
+
+export default ScrollFocusContext;
