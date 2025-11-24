@@ -1,6 +1,5 @@
 import { Clock, Loader, Mail, MapPin } from "lucide-react";
 import { UseScrollContext } from "../../context/ScrollFocusContext";
-// import { handleSubmit } from "../../lib/api";
 import { UseFormContext } from "../../context/formContext";
 import { handleValueChange, showToast } from "../../lib/helpers";
 
