@@ -38,10 +38,6 @@ function App() {
 				<About />
 				<Contact />
 				<Footer />
-				<div
-					id="toast-container"
-					className="fixed bottom-10 right-5 z-50 space-y-3"
-				></div>
 				<button
 					onClick={() => {
 						window.scrollTo({
@@ -49,9 +45,9 @@ function App() {
 							behavior: "smooth",
 						});
 					}}
-					id="back-to-top"
-					className={`fixed bottom-10 right-6 w-12 h-12 bg-[#3b82f6] rounded-full shadow-lg flex items-center justify-center ${scrolled ? "opacity-100 visible" : "opacity-0 invisible"
-						} transition-all duration-300 hover:bg-blue-600 cursor-pointer`}
+					className={`fixed bottom-10 right-6 w-12 h-12 bg-[#3b82f6] rounded-full shadow-lg flex items-center justify-center ${
+						scrolled ? "opacity-100 visible" : "opacity-0 invisible"
+					} transition-all duration-300 hover:bg-blue-600 cursor-pointer`}
 				>
 					<ArrowUpAz />
 				</button>

@@ -107,7 +107,7 @@ export const skills = [
 			{ name: "JavaScript", percentage: 95 },
 			{ name: "Tailwind CSS", percentage: 97 },
 			{ name: "HTML/CSS", percentage: 98 },
-			{ name: "Django", percentage: 70 },
+			{ name: "Django", percentage: 90 },
 		],
 	},
 	{
@@ -126,8 +126,8 @@ export const skills = [
 		title: "Mobile Development",
 		icon: "ri-smartphone-line",
 		list: [
-			{ name: "React Native", percentage: 80 },
-			{ name: "Expo", percentage: 90 },
+			{ name: "React Native", percentage: 90 },
+			{ name: "Expo", percentage: 98 },
 		],
 	},
 	{
