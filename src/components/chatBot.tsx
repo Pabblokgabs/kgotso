@@ -16,58 +16,72 @@ export default function ChatBot() {
 	const [input, setInput] = useState("");
 
 	useEffect(() => {
-		setTimeout(() => {
+		const timer = setTimeout(() => {
 			setShowBotHint(false);
 		}, 5000);
+		return () => clearTimeout(timer);
 	}, []);
 
-	async function sendMessage() {
+	const sendMessage = async () => {
 		if (!input.trim()) return;
 
 		const userMsg = { role: "user", content: input };
 		setMessages((prev) => [...prev, userMsg]);
-
 		setLoading(true);
-
-		const res = await fetch("/api/chat", {
-			method: "POST",
-			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify({ messages: [...messages, userMsg] }),
-		});
-
-		const data = await res.json();
-
-		const botMsg =
-			data?.choices?.[0]?.message?.content ||
-			"⚠️ Something went wrong. Try again.";
-
-		setMessages((prev) => [...prev, { role: "assistant", content: botMsg }]);
-		setLoading(false);
 		setInput("");
-	}
+
+		try {
+			const res = await fetch("http://localhost:5001/chat", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({ messages: [...messages, userMsg] }),
+			});
+
+			const data = await res.json();
+
+			const botMsg =
+				data?.choices?.[0]?.message?.content ||
+				"⚠️ Something went wrong. Try again.";
+
+			setMessages((prev) => [...prev, { role: "assistant", content: botMsg }]);
+		} catch (err) {
+			setMessages((prev) => [
+				...prev,
+				{ role: "assistant", content: "⚠️ Something went wrong. Try again." },
+			]);
+			console.error(err);
+		} finally {
+			setLoading(false);
+		}
+	};
 
 	return (
 		<>
 			<button
 				onClick={() => setOpen(!open)}
 				className={`fixed bottom-28 right-6 ${
-					!open && "animate-bounce-"
+					!open ? "animate-bounce" : ""
 				} cursor-pointer w-14 h-14 rounded-full hover:animate-none bg-blue-600 text-white shadow-xl flex items-center justify-center text-xl z-50 hover:bg-blue-700 transition`}
 			>
 				<BotMessageSquare />
 			</button>
 
 			{open && (
-				<div className="fixed bottom-44 right-6 w-80 h-96 bg-linear-to-b from-neutral-700 to-neutral-700 text-white shadow-2xl rounded-lg flex flex-col z-50">
+				<div className="fixed bottom-44 right-6 w-80 h-96 bg-neutral-800 text-white shadow-2xl rounded-lg flex flex-col z-50">
+
 					<div className="flex items-center justify-between p-3 bg-blue-600 text-white font-semibold rounded-t-lg">
 						<p>Kgotso's AI Bot</p>
 						<button
-							onClick={() => setOpen(!open)}
+							onClick={() => setOpen(false)}
 							className="cursor-pointer text-gray-300 transition-colors hover:text-white"
 						>
 							X
 						</button>
 					</div>
+
+					{/* Messages */}
 					<ScrollArea className="flex-1 block whitespace-nowrap overflow-hidden">
 						<div className="flex-1 p-3 flex flex-col space-y-2">
 							{messages.map((msg, i) => (
@@ -82,7 +96,6 @@ export default function ChatBot() {
 									{msg.content}
 								</span>
 							))}
-
 							{loading && (
 								<div className="text-gray-200 text-sm">
 									Assistant is typing…
@@ -92,6 +105,7 @@ export default function ChatBot() {
 						<ScrollBar orientation="vertical" />
 					</ScrollArea>
 
+					{/* Input */}
 					<div className="p-3 border-t border-t-neutral-400 flex gap-2">
 						<input
 							value={input}
@@ -102,7 +116,7 @@ export default function ChatBot() {
 						/>
 						<button
 							onClick={sendMessage}
-							className="bg-[#3b82f6] text-white px-3 cursor-pointer py-1 rounded-lg hover:bg-blue-500 justify-center item-center"
+							className="bg-[#3b82f6] text-white px-3 cursor-pointer py-1 rounded-lg hover:bg-blue-500 flex items-center justify-center"
 						>
 							<Send size={14} />
 						</button>
@@ -113,7 +127,7 @@ export default function ChatBot() {
 			{!open && showBotHint && (
 				<>
 					<div className="fixed bottom-44 right-20 max-w-90 bg-blue-500 py-1 px-1.5 text-white shadow-2xl rounded-lg flex flex-col rounded-br-none rounded-tl-none z-50">
-						Hey there! Have some quetions about Kgotso's profession? Ask me 😁
+						Hey there! Have some questions about Kgotso's profession? Ask me 😁
 					</div>
 					<div className="fixed bottom-46 p-2 animate-bounce right-10 max-w-90 bg-blue-500 py-1 px-1.5 rounded-full flex flex-col z-50">
 						👇

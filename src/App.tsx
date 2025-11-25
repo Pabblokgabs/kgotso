@@ -8,6 +8,7 @@ import About from "./components/home/about";
 import Contact from "./components/home/contact";
 import Skills from "./components/home/skill";
 import { ArrowUpAz } from "lucide-react";
+import ChatBot from "./components/chatBot";
 
 function App() {
 	const [scrolled, setScrolled] = useState(false);
@@ -38,6 +39,7 @@ function App() {
 				<About />
 				<Contact />
 				<Footer />
+				{/* <ChatBot /> */}
 				<button
 					onClick={() => {
 						window.scrollTo({
