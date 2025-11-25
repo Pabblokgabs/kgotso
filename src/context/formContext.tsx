@@ -71,7 +71,7 @@ export const FormProvider: React.FC<Props> = ({ children }) => {
 		try {
 			setIsSubmiting(true);
 
-			const response = await fetch("http://localhost:5001/contact", {
+			const response = await fetch("https://portfolio-server-eight-azure.vercel.app/contact", {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",

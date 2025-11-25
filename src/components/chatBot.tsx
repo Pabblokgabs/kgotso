@@ -31,7 +31,7 @@ export default function ChatBot() {
 		setInput("");
 
 		try {
-			const res = await fetch("http://localhost:5001/chat", {
+			const res = await fetch("https://portfolio-server-eight-azure.vercel.app/chat", {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",

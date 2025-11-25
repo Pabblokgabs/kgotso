@@ -39,7 +39,7 @@ function App() {
 				<About />
 				<Contact />
 				<Footer />
-				{/* <ChatBot /> */}
+				<ChatBot />
 				<button
 					onClick={() => {
 						window.scrollTo({
